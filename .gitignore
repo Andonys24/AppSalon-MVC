@@ -1,0 +1,7 @@
+# Ignorar carpeta de instalacion de dependencias
+vendor/
+node_modules/
+
+# Ignorar archivos lock
+composer.lock
+package-lock.json
