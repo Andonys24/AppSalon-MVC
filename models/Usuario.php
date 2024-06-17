@@ -85,10 +85,46 @@ class Usuario extends ActiveRecord
             case empty($this->email):
                 self::$alertas['error'][] = 'El E-mail es Obligatorio';
                 break;
+            case !filter_var($this->email, FILTER_VALIDATE_EMAIL):
+                self::$alertas['error'][] = 'El E-mail no es Valido';
+                break;
             case empty($this->password):
                 self::$alertas['error'][] = 'La contraseña es Obligatorio';
                 break;
         }
+        return self::$alertas;
+    }
+
+    public function validarEmail()
+    {
+        switch (true) {
+            case empty($this->email):
+                self::$alertas['error'][] = 'El E-mail es Obligatorio';
+                break;
+            case !filter_var($this->email, FILTER_VALIDATE_EMAIL):
+                self::$alertas['error'][] = 'El E-mail no es Valido';
+                break;
+        }
+        return self::$alertas;
+    }
+
+    public function validarPassword()
+    {
+        switch (true) {
+            case empty($this->password):
+                self::$alertas['error'][] = 'La contraseña es Obligatorio';
+                break;
+            case !validarLongitudMinima($this->password):
+                self::$alertas['error'][] = 'La contraseña debe tener al menos 8 caracteres';
+                break;
+            case !validarLetrasMayusculasMinusculas($this->password):
+                self::$alertas['error'][] = 'La contraseña debe incluir al menos una letra mayúscula y una letra minúscula';
+                break;
+            case !validarNumerosCaracteresEspeciales($this->password):
+                self::$alertas['error'][] = 'La contraseña debe incluir al menos un número y un carácter especial (@$!%*?&)';
+                break;
+        }
+
         return self::$alertas;
     }
 
@@ -114,12 +150,13 @@ class Usuario extends ActiveRecord
         $this->token = uniqid();
     }
 
-    public function comprobarPasswordAndVerificado($password) {
+    public function comprobarPasswordAndVerificado($password)
+    {
         $resultado = password_verify($password, $this->password);
-        
+
         if (!$resultado || !$this->confirmado) {
             self::$alertas['error'][] = 'Contraseña incorrecta o tu cuenta aun no ha sido activada.';
-        } else{
+        } else {
             return true;
         }
     }
