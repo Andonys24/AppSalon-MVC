@@ -78,6 +78,20 @@ class Usuario extends ActiveRecord
 
         return self::$alertas;
     }
+
+    public function validarLogin()
+    {
+        switch (true) {
+            case empty($this->email):
+                self::$alertas['error'][] = 'El E-mail es Obligatorio';
+                break;
+            case empty($this->password):
+                self::$alertas['error'][] = 'La contraseña es Obligatorio';
+                break;
+        }
+        return self::$alertas;
+    }
+
     // Revisa si el usuario ya existe
     public function existeUsuario()
     {
@@ -89,12 +103,24 @@ class Usuario extends ActiveRecord
         }
         return $resultado;
     }
+
     public function hashPassword()
     {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
+
     public function crearToken()
     {
         $this->token = uniqid();
+    }
+
+    public function comprobarPasswordAndVerificado($password) {
+        $resultado = password_verify($password, $this->password);
+        
+        if (!$resultado || !$this->confirmado) {
+            self::$alertas['error'][] = 'Contraseña incorrecta o tu cuenta aun no ha sido activada.';
+        } else{
+            return true;
+        }
     }
 }
