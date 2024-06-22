@@ -20,7 +20,7 @@
         border-radius: 1rem;
 
         &:disabled {
-            background-color: lighten(v.$negro, 30%);
+            background-color: lighten(v.$negro, 20%);
             color: v.$blanco;
             cursor: not-allowed;
         }
