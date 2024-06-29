@@ -1,6 +1,7 @@
 <?php
 
-function debuguear($variable) : string {
+function debuguear($variable): string
+{
     echo "<pre>";
     var_dump($variable);
     echo "</pre>";
@@ -8,7 +9,8 @@ function debuguear($variable) : string {
 }
 
 // Escapa / Sanitizar el HTML
-function s($html) : string {
+function s($html): string
+{
     $s = htmlspecialchars($html);
     return $s;
 }
@@ -31,4 +33,13 @@ function validarLetrasMayusculasMinusculas($password)
 function validarNumerosCaracteresEspeciales($password)
 {
     return preg_match('/[\d]/', $password) && preg_match('/[@$!%*?&]/', $password);
+}
+
+// Funcion para revisar si el usuario esta autenticado
+
+function isAuth(): void
+{
+    if (!isset($_SESSION['login'])) {
+        header('Location: /');
+    }
 }

@@ -55,7 +55,9 @@ class LoginController
     }
     public static function logout(Router $router)
     {
-        echo 'Desde Logout';
+        session_start();
+        $_SESSION = [];
+        header('Location: /');
     }
     public static function olvide(Router $router)
     {
@@ -105,7 +107,7 @@ class LoginController
             $error = true;
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Leer el nuevo password y guardarlo
             $password = new Usuario($_POST);
             $alertas = $password->validarPassword();
