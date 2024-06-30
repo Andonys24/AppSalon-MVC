@@ -43,8 +43,11 @@ class APIController
     {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Buscamos el id
             $id = $_POST['id'];
+            // Lo encontramos
             $cita = Cita::find($id);
+            // Lo eliminamos
             $cita->eliminar();
             header('Location:' . $_SERVER['HTTP_REFERER']);
         }
