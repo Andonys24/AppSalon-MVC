@@ -9,13 +9,25 @@
 
 		p {
 			font-weight: v.$bold;
-            color: v.$azul;
+			color: v.$azul;
 		}
 
 		span,
 		.servicio {
 			font-weight: v.$regular;
-            color: v.$blanco;
+			color: v.$blanco;
 		}
+	}
+}
+
+.servicios {
+	@extend .citas;
+
+	.acciones {
+		margin: 0;
+	}
+	.boton,
+	.boton-eliminar {
+		margin: 0;
 	}
 }

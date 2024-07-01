@@ -1,5 +1,5 @@
 <h1 class="nombre-pagina">Panel de Administracion</h1>
-<p class="descripcion-pagina">Administracion</p>
+<p class="descripcion-pagina">Panel de administración para gestionar y administrar citas programadas.</p>
 
 <?php include_once __DIR__ . '/../templates/barra.php' ?>
 
@@ -40,7 +40,7 @@ if (count($citas) === 0) { ?>
             } // Fin IF 
             $total += $cita->precio;
                 ?>
-                <p class="servicio"><?php echo $cita->servicio . ' = L.' . $cita->precio; ?></p>
+                <p class="servicio"><?php echo $cita->servicio . ' L.' . $cita->precio; ?></p>
 
                 <?php
                 $actual = $cita->id;

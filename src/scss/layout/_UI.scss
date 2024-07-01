@@ -57,6 +57,6 @@
 	.boton {
 		@include m.boton(v.$negro, v.$blanco);
 		margin: 0;
-		border-radius: 5px;
+		border-radius: 1rem;
 	}
 }
