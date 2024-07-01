@@ -21,11 +21,11 @@ class Email
         // Crear el objeto de email
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '9513fdc5f5135d';
-        $mail->Password = '8a2bb879758caa';
+        $mail->Port = $_ENV['EMAIL_PORT'];
+        $mail->Username = $_ENV['EMAIL_USER'];
+        $mail->Password = $_ENV['EMAIL_PASS'];
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress('cuentas@appsalon.com', 'AppSalon.com');
         $mail->Subject = 'Confirmar tu cuenta';
@@ -50,7 +50,7 @@ class Email
         $contenido .= '</div>';
         $contenido .= "<p>Hola <strong>" . htmlspecialchars($this->nombre, ENT_QUOTES, 'UTF-8') . "</strong>,</p>";
         $contenido .= "<p>Has creado tu cuenta en App Salón. Solo debes confirmarla presionando el siguiente enlace:</p>";
-        $contenido .= "<p><a href='http://localhost:3000/confirmar-cuenta?token=" . urlencode($this->token) . "' class='button'>Confirmar Cuenta</a></p>";
+        $contenido .= "<p><a href='" . $_ENV['APP_URL'] . "/confirmar-cuenta?token=" . urlencode($this->token) . "' class='button'>Confirmar Cuenta</a></p>";
         $contenido .= "<p>Si tú no solicitaste esta cuenta, puedes ignorar este mensaje. Nadie más podrá confirmar tu cuenta sin tu autorización.</p>";
         $contenido .= '<div class="footer">';
         $contenido .= '<p>Gracias,</p>';
@@ -71,11 +71,11 @@ class Email
         // Crear el objeto de email
         $mail = new PHPMailer();
         $mail->isSMTP();
-        $mail->Host = 'sandbox.smtp.mailtrap.io';
+        $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '9513fdc5f5135d';
-        $mail->Password = '8a2bb879758caa';
+        $mail->Port = $_ENV['EMAIL_PORT'];
+        $mail->Username = $_ENV['EMAIL_USER'];
+        $mail->Password = $_ENV['EMAIL_PASS'];
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress('cuentas@appsalon.com', 'AppSalon.com');
         $mail->Subject = 'Restablecer tu Password';
@@ -104,7 +104,7 @@ class Email
         $contenido .= '<div class="content">';
         $contenido .= "<p>Hola <strong>" . htmlspecialchars($this->nombre, ENT_QUOTES, 'UTF-8') . "</strong>,</p>";
         $contenido .= "<p>Has solicitado restablecer tu contraseña. Para proceder, por favor, sigue el siguiente enlace:</p>";
-        $contenido .= "<p><a href='http://localhost:3000/recuperar?token=" . urlencode($this->token) . "' class='button'>Restablecer Contraseña</a></p>";
+        $contenido .= "<p><a href='" . $_ENV['APP_URL'] . "/recuperar?token=" . urlencode($this->token) . "' class='button'>Restablecer Contraseña</a></p>";
         $contenido .= "<p>Si tú no solicitaste este cambio, por favor, ignora este mensaje.</p>";
         $contenido .= '</div>';
         $contenido .= '<div class="footer">';
