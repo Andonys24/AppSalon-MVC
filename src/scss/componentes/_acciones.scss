@@ -14,5 +14,10 @@
 		display: block;
 		margin-bottom: calc(v.$separacion / 2);
 		text-align: center;
+		transition: ease-in-out 300ms;
+
+		&:hover {
+			color: v.$azul;
+		}
 	}
 }

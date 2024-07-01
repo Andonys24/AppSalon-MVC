@@ -7,14 +7,14 @@
 <div class="busqueda">
     <form class="formulario" action="">
         <div class="campo">
-            <label for="fecha">Fecha</label>
+            <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" id="fecha" value="<?php echo $fecha ?>">
         </div>
     </form>
 </div>
 <?php
 if (count($citas) === 0) { ?>
-    <h2>No hay citas en esta Fecha</h2>
+    <h2 class="no-citas">No hay citas en esta Fecha</h2>
 <?php
 }
 ?>

@@ -1,4 +1,4 @@
-<h1 class="nombre-pagina">Crear Cuenta</h1>
+<h1 class="nombre-pagina">Crea Tu Cuenta</h1>
 <p class="descripcion-pagina">Llena el siguiente formulario para crear una cuenta</p>
 
 <?php include_once __DIR__ . '/../templates/alertas.php'; ?>

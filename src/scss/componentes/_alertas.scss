@@ -10,6 +10,7 @@
 	text-align: center;
 	font-weight: v.$bold;
 	text-transform: uppercase;
+	border-radius: 1rem;
 
 	&.error {
 		background-color: v.$rojo;
