@@ -25,6 +25,9 @@ class Servicio extends ActiveRecord
             case empty($this->nombre):
                 self::$alertas['error'][] = 'El nombre del Servicio es Obligatorio';
                 break;
+            case !preg_match('/^[a-zA-Z\s]+$/', $this->nombre):
+                self::$alertas['error'][] = 'El Nombre del Servicio solo debe contener letras y espacios.';
+                break;
             case empty($this->precio):
                 self::$alertas['error'][] = 'El precio del Servicio es Obligatorio';
                 break;

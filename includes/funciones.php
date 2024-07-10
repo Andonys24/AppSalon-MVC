@@ -15,26 +15,6 @@ function s($html): string
     return $s;
 }
 
-// Funciones para validar contrasenas
-
-// Validar caracteres minimos
-function validarLongitudMinima($password)
-{
-    return strlen($password) >= 8;
-}
-
-// Validar de inclusion de letras mayusculas y minusculas
-function validarLetrasMayusculasMinusculas($password)
-{
-    return preg_match('/[A-Z]/', $password) && preg_match('/[a-z]/', $password);
-}
-
-// Validacion de numeros y caracteres especiales
-function validarNumerosCaracteresEspeciales($password)
-{
-    return preg_match('/[\d]/', $password) && preg_match('/[@$!%*?&]/', $password);
-}
-
 function esUltimo(string $actual, string $proximo): bool
 {
     if ($actual !== $proximo) {
@@ -42,6 +22,7 @@ function esUltimo(string $actual, string $proximo): bool
     }
     return false;
 }
+
 // Funcion para revisar si el usuario esta autenticado
 function isAuth(): void
 {

@@ -47,8 +47,14 @@ class Usuario extends ActiveRecord
             case empty($this->nombre):
                 self::$alertas['error'][] = 'El nombre es Obligatorio';
                 break;
+            case !preg_match('/^[a-zA-Z\s]+$/', $this->nombre):
+                self::$alertas['error'][] = 'El Nombre solo debe contener letras y espacios.';
+                break;
             case empty($this->apellido):
                 self::$alertas['error'][] = 'El apellido es Obligatorio';
+                break;
+            case !preg_match('/^[a-zA-Z\s]+$/', $this->apellido):
+                self::$alertas['error'][] = 'El Apellido solo debe contener letras y espacios.';
                 break;
             case empty($this->telefono):
                 self::$alertas['error'][] = 'El numero telefonico es Obligatorio';
@@ -65,14 +71,17 @@ class Usuario extends ActiveRecord
             case empty($this->password):
                 self::$alertas['error'][] = 'La contraseña es Obligatorio';
                 break;
-            case !validarLongitudMinima($this->password):
-                self::$alertas['error'][] = 'La contraseña debe tener al menos 8 caracteres';
+            case strlen($this->password) < 8:
+                self::$alertas['error'][] = 'El Password debe tener al menos 8 caracteres.';
                 break;
-            case !validarLetrasMayusculasMinusculas($this->password):
-                self::$alertas['error'][] = 'La contraseña debe incluir al menos una letra mayúscula y una letra minúscula';
+            case !preg_match('/[a-z]/', $this->password) || !preg_match('/[A-Z]/', $this->password):
+                self::$alertas['error'][] = 'La Contraseña debe contener al menos una letra mayúscula y una letra minúscula.';
                 break;
-            case !validarNumerosCaracteresEspeciales($this->password):
-                self::$alertas['error'][] = 'La contraseña debe incluir al menos un número y un carácter especial (@$!%*?&)';
+            case !preg_match('/\d/', $this->password):
+                self::$alertas['error'][] = 'La Contraseña debe contener al menos un número.';
+                break;
+            case !preg_match('/[^a-zA-Z\d\s]/', $this->password):
+                self::$alertas['error'][] = 'La Contraseña debe contener al menos un carácter especial.';
                 break;
         }
 
@@ -114,14 +123,17 @@ class Usuario extends ActiveRecord
             case empty($this->password):
                 self::$alertas['error'][] = 'La contraseña es Obligatorio';
                 break;
-            case !validarLongitudMinima($this->password):
-                self::$alertas['error'][] = 'La contraseña debe tener al menos 8 caracteres';
+            case strlen($this->password) < 8:
+                self::$alertas['error'][] = 'El Password debe tener al menos 8 caracteres.';
                 break;
-            case !validarLetrasMayusculasMinusculas($this->password):
-                self::$alertas['error'][] = 'La contraseña debe incluir al menos una letra mayúscula y una letra minúscula';
+            case !preg_match('/[a-z]/', $this->password) || !preg_match('/[A-Z]/', $this->password):
+                self::$alertas['error'][] = 'La Contraseña debe contener al menos una letra mayúscula y una letra minúscula.';
                 break;
-            case !validarNumerosCaracteresEspeciales($this->password):
-                self::$alertas['error'][] = 'La contraseña debe incluir al menos un número y un carácter especial (@$!%*?&)';
+            case !preg_match('/\d/', $this->password):
+                self::$alertas['error'][] = 'La Contraseña debe contener al menos un número.';
+                break;
+            case !preg_match('/[^a-zA-Z\d\s]/', $this->password):
+                self::$alertas['error'][] = 'La Contraseña debe contener al menos un carácter especial.';
                 break;
         }
 
