@@ -84,7 +84,7 @@ CREATE TABLE `servicios` (
   `nombre` varchar(70) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `precio` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +115,7 @@ CREATE TABLE `usuarios` (
   `confirmado` tinyint(1) DEFAULT NULL,
   `token` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Admin','SuperPorderoso','admin@gmail.com','$2y$10$PXk900wc42x8fjGfQWwPuuNraKl5d8A8RSgkeHQHhmIK5Bq6M334O','12345678',1,1,NULL),(2,' Laura','Oseguera','sofiaoseguera111@gmail.com','$2y$10$PXk900wc42x8fjGfQWwPuuNraKl5d8A8RSgkeHQHhmIK5Bq6M334O','19203856',0,0,'666fa2bccca1a '),(3,'Carlos','Ramos','carlosramos14@gmail.com','$2y$10$HeU9E5vCf8OZPpb.Y8AflObmEz1TQk/28aSdjMKPLzKAPzcumospa','91456780',0,1,''),(4,'Andoni','Hernandez','andonihernandez1990@gmail.com','$2y$10$PXk900wc42x8fjGfQWwPuuNraKl5d8A8RSgkeHQHhmIK5Bq6M334O','97940675',0,1,NULL),(5,' Sofía','Ramírez','sofia.ramirez@example.com','$2y$10$mcDu48SUsb963QV8x/DC/.Y2U.7e3yD4jjwp6/SemMDuuRz68sYTu','55443322',0,1,'');
+INSERT INTO `usuarios` VALUES (1,'Admin','SuperPorderoso','admin@gmail.com','$2y$10$PXk900wc42x8fjGfQWwPuuNraKl5d8A8RSgkeHQHhmIK5Bq6M334O','12345678',1,1,NULL),(2,' Laura','Oseguera','sofiaoseguera111@gmail.com','$2y$10$PXk900wc42x8fjGfQWwPuuNraKl5d8A8RSgkeHQHhmIK5Bq6M334O','19203856',0,0,''),(3,'Carlos','Ramos','carlosramos14@gmail.com','$2y$10$HeU9E5vCf8OZPpb.Y8AflObmEz1TQk/28aSdjMKPLzKAPzcumospa','91456780',0,1,''),(4,'Andoni','Hernandez','andonys24@gmail.com','$2y$10$PXk900wc42x8fjGfQWwPuuNraKl5d8A8RSgkeHQHhmIK5Bq6M334O','97940675',0,1,''),(5,' Sofía','Ramírez','sofia.ramirez@example.com','$2y$10$mcDu48SUsb963QV8x/DC/.Y2U.7e3yD4jjwp6/SemMDuuRz68sYTu','55443322',0,1,''),(6,' Andonys','Jr','mjr521250@gmail.com','$2y$10$D4BlKU7MbzAmcQ0AXCqRSuJU/6LrjTqTe3WLJwpHVSLZYO6sK1S9m','19293847',0,1,'669e20cf6d87c');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-30 22:24:09
+-- Dump completed on 2024-07-22  3:33:06

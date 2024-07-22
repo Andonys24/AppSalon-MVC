@@ -44,17 +44,9 @@ class Usuario extends ActiveRecord
     public function validarNuevaCuenta()
     {
         switch (true) {
-            case empty($this->nombre):
-                self::$alertas['error'][] = 'El nombre es Obligatorio';
+            case $this->validar_nombre_apellido($this->nombre, 'Nombre'):
                 break;
-            case !preg_match('/^[a-zA-Z\s]+$/', $this->nombre):
-                self::$alertas['error'][] = 'El Nombre solo debe contener letras y espacios.';
-                break;
-            case empty($this->apellido):
-                self::$alertas['error'][] = 'El apellido es Obligatorio';
-                break;
-            case !preg_match('/^[a-zA-Z\s]+$/', $this->apellido):
-                self::$alertas['error'][] = 'El Apellido solo debe contener letras y espacios.';
+            case $this->validar_nombre_apellido($this->apellido, 'Apellido'):
                 break;
             case empty($this->telefono):
                 self::$alertas['error'][] = 'El numero telefonico es Obligatorio';
@@ -62,26 +54,9 @@ class Usuario extends ActiveRecord
             case !preg_match('/^[0-9]{8}$/', $this->telefono):
                 self::$alertas['error'][] = 'El numero de telefono no es Valido';
                 break;
-            case empty($this->email):
-                self::$alertas['error'][] = 'El E-mail es Obligatorio';
+            case $this->validarEmail():
                 break;
-            case !filter_var($this->email, FILTER_VALIDATE_EMAIL):
-                self::$alertas['error'][] = 'El E-mail no es Valido';
-                break;
-            case empty($this->password):
-                self::$alertas['error'][] = 'La contraseña es Obligatorio';
-                break;
-            case strlen($this->password) < 8:
-                self::$alertas['error'][] = 'El Password debe tener al menos 8 caracteres.';
-                break;
-            case !preg_match('/[a-z]/', $this->password) || !preg_match('/[A-Z]/', $this->password):
-                self::$alertas['error'][] = 'La Contraseña debe contener al menos una letra mayúscula y una letra minúscula.';
-                break;
-            case !preg_match('/\d/', $this->password):
-                self::$alertas['error'][] = 'La Contraseña debe contener al menos un número.';
-                break;
-            case !preg_match('/[^a-zA-Z\d\s]/', $this->password):
-                self::$alertas['error'][] = 'La Contraseña debe contener al menos un carácter especial.';
+            case $this->validarPassword($this->password):
                 break;
         }
 
@@ -91,14 +66,10 @@ class Usuario extends ActiveRecord
     public function validarLogin()
     {
         switch (true) {
-            case empty($this->email):
-                self::$alertas['error'][] = 'El E-mail es Obligatorio';
-                break;
-            case !filter_var($this->email, FILTER_VALIDATE_EMAIL):
-                self::$alertas['error'][] = 'El E-mail no es Valido';
+            case $this->validarEmail():
                 break;
             case empty($this->password):
-                self::$alertas['error'][] = 'La contraseña es Obligatorio';
+                self::$alertas['error'][] = 'El Password es Obligatorio.';
                 break;
         }
         return self::$alertas;
@@ -108,35 +79,56 @@ class Usuario extends ActiveRecord
     {
         switch (true) {
             case empty($this->email):
-                self::$alertas['error'][] = 'El E-mail es Obligatorio';
+                self::$alertas['error'][] = 'El Email es Obligatorio.';
+                break;
+            case strlen($this->email) > 255:
+                self::$alertas['error'][] = 'El Email no puede tener más de 255 caracteres.';
                 break;
             case !filter_var($this->email, FILTER_VALIDATE_EMAIL):
-                self::$alertas['error'][] = 'El E-mail no es Valido';
+                self::$alertas['error'][] = 'El Email no es Valido.';
                 break;
         }
         return self::$alertas;
     }
 
-    public function validarPassword()
+    public function validarPassword($password)
     {
         switch (true) {
-            case empty($this->password):
-                self::$alertas['error'][] = 'La contraseña es Obligatorio';
+            case empty($password):
+                self::$alertas['error'][] = 'El Password es Obligatorio.';
                 break;
-            case strlen($this->password) < 8:
+            case strlen($password) < 8:
                 self::$alertas['error'][] = 'El Password debe tener al menos 8 caracteres.';
                 break;
-            case !preg_match('/[a-z]/', $this->password) || !preg_match('/[A-Z]/', $this->password):
+            case !preg_match('/[a-z]/', $password) || !preg_match('/[A-Z]/', $password):
                 self::$alertas['error'][] = 'La Contraseña debe contener al menos una letra mayúscula y una letra minúscula.';
                 break;
-            case !preg_match('/\d/', $this->password):
+            case !preg_match('/\d/', $password):
                 self::$alertas['error'][] = 'La Contraseña debe contener al menos un número.';
                 break;
-            case !preg_match('/[^a-zA-Z\d\s]/', $this->password):
+            case !preg_match('/[^a-zA-Z\d\s]/', $password):
                 self::$alertas['error'][] = 'La Contraseña debe contener al menos un carácter especial.';
                 break;
         }
+        return self::$alertas;
+    }
 
+    public function validar_nombre_apellido($campo, $nombre_campo)
+    {
+        // Definir límites de caracteres
+        $limite_caracteres = 60;
+
+        switch (true) {
+            case empty($campo):
+                self::$alertas['error'][] = "El $nombre_campo es Obligatorio";
+                break;
+            case strlen($campo) > $limite_caracteres:
+                self::$alertas['error'][] = "El $nombre_campo no puede tener más de $limite_caracteres caracteres.";
+                break;
+            case !preg_match('/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/', $campo):
+                self::$alertas['error'][] = "El $nombre_campo solo debe contener letras y espacios.";
+                break;
+        }
         return self::$alertas;
     }
 

@@ -5,7 +5,7 @@ use Model\ActiveRecord;
 
 require __DIR__ . '/../vendor/autoload.php';
 // Traer Variables de entorno
-$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv::createImmutable(__DIR__, 'AppSalon.env');
 $dotenv->safeLoad();
 
 require 'funciones.php';

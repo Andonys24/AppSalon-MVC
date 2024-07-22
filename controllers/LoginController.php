@@ -70,18 +70,23 @@ class LoginController
             if (empty($alertas)) {
                 $usuario = Usuario::where('email', $auth->email);
                 if ($usuario && $usuario->confirmado === '1') {
-                    // Generar token de un solo Uso
-                    $usuario->crearToken();
-                    $usuario->guardar();
 
-                    // Enviar email
-                    $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
-                    $email->enviarInstrucciones();
+                    if ($usuario->token) {
+                        // Usuario ya tiene un token
+                        Usuario::setAlerta('error', 'Ya hemos enviado previamente las instrucciones a tu Email.');
+                    } else{
+                        // Generar token de un solo Uso
+                        $usuario->crearToken();
+                        $usuario->guardar();
 
-                    // TODO: Enviar email
+                        // Enviar email
+                        $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                        $email->enviarInstrucciones();
+                        // TODO: Enviar email
 
-                    // Alerta de Exito
-                    Usuario::setAlerta('exito', 'Revisa tu Email');
+                        // Alerta de Exito
+                        Usuario::setAlerta('exito', 'Revisa tu Email');
+                    }
                 } else {
                     Usuario::setAlerta('error', 'El usuario no existe o no esta confirmado');
                 }
@@ -110,7 +115,7 @@ class LoginController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Leer el nuevo password y guardarlo
             $password = new Usuario($_POST);
-            $alertas = $password->validarPassword();
+            $alertas = $password->validarPassword($usuario->password);
 
             if (empty($alertas)) {
                 $usuario->password = null;
@@ -158,7 +163,7 @@ class LoginController
                     $usuario->crearToken();
 
                     // Enviar Email con Token
-                    $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
 
                     // Enviar Confirmacion
                     $email->enviarConfirmacion();
